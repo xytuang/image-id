@@ -4,6 +4,7 @@ import axios from "axios"
 
 function App() {
   const [file, setFile] = useState(null)
+  const [output, setOutput] = useState('Upload something!')
 
   const handleUpload = (event) => {
     setFile(event.target.files[0])
@@ -21,7 +22,7 @@ function App() {
       },
     }
     try {
-      axios.post(url, formData, config).then((response) => {console.log(response.data)})
+      axios.post(url, formData, config).then((response) => {setOutput(response.data)})
     } catch (error) {
       console.log(error)
     }
@@ -34,6 +35,7 @@ function App() {
         <input type="file" onChange={handleUpload}/>
         <button type="Submit">Upload</button>
       </form>
+      <div>{output}</div>
     </div>
   );
 }
